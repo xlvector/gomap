@@ -3,6 +3,7 @@ package gomap
 import(
     "encoding/json"
     "github.com/xlvector/gomap/qq"
+    "github.com/xlvector/gomap/baidu"
     "github.com/xlvector/gomap/data"
     "strconv"
     "net/http"
@@ -11,12 +12,14 @@ import(
 )
 
 type NearByService struct {
-    api     *qq.NearByAPI
+    qqApi      *qq.NearByAPI
+    baiduApi   *baidu.NearByAPI
 }
 
 func NewNearByService() *NearByService {
     service := NearByService{
-        api : qq.NewNearByAPI(),
+        qqApi: qq.NewNearByAPI(),
+        baiduApi: baidu.NewNearByAPI(),
     }
     return &service
 }
@@ -33,6 +36,7 @@ func (self *NearByService) ServeHTTP(w http.ResponseWriter, req *http.Request) {
     region := req.FormValue("region")
     query := req.FormValue("query")
     radius := req.FormValue("radius")
+    provider := req.FormValue("provider")
 
     var answers *data.NearByResp
     if address == "" || region == "" || query == "" {
@@ -45,7 +49,12 @@ func (self *NearByService) ServeHTTP(w http.ResponseWriter, req *http.Request) {
             radius = "5000"
         }
         radiusValue, _ := strconv.Atoi(radius)
-        answers = self.api.NearBy(address, query, region, radiusValue)
+        if provider == "baidu" {
+            answers = self.baiduApi.NearBy(address, query, region, radiusValue)
+        } else {
+            answers = self.qqApi.NearBy(address, query, region, radiusValue)
+        }
+        
     }
     output, err := json.Marshal(answers)
     if err == nil{

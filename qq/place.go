@@ -36,7 +36,7 @@ func buildEndpoint(api string, params map[string]string) string{
     for key, value := range params {
         endpoint += key + "=" + value + "&"
     }
-    endpoint += "output=json&key=" + AK
+    endpoint += "orderby=_distance&output=json&key=" + AK
     return endpoint
 }
 

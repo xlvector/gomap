@@ -31,11 +31,11 @@ func (self *NearByAPI) NearBy(address, query, region string, radius int) *data.N
 	ret := data.NearByResp{
 		Status: places.Status,
 		Message: places.Message,
-		Results: []data.Result{},
+		Results: []data.NearyByResult{},
 	}
 
 	for _, result := range places.Data {
-		dret := data.Result{
+		dret := data.NearyByResult{
 			Name: result.Title,
 			Location: data.Location{
 				Lng: result.Location.Lng,

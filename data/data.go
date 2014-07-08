@@ -5,7 +5,7 @@ type Location struct {
     Lat float64 `json:"lat"`
 }
 
-type Result struct {
+type NearyByResult struct {
     Name        string      `json:"name"`
     Location    Location    `json:"location"`
     Address     string      `json:"address"`
@@ -15,5 +15,19 @@ type Result struct {
 type NearByResp struct {
     Status      int       	`json:"status"`
     Message     string      `json:"message"`
-    Results     []Result    `json:"results"`
+    Results     []NearyByResult    `json:"results"`
+}
+
+type DirectionResp struct {
+	Status 	int  	`json:"status"`
+	Message string 	`json:"message"`
+	Result 	DirectionResult 	`json:"result"`
+}
+
+type DirectionResult struct {
+	Routes	[]DirectionRoute	`json:"routes"`
+}
+
+type DirectionRoute struct {
+	Sequence []string `json:"seq"`
 }

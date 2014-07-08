@@ -9,6 +9,7 @@ import (
 
 func main() {
     http.Handle("/nearby", gomap.NewNearByService())
+    http.Handle("/direction", gomap.NewDirectionService())
     s := &http.Server{
         Addr:           ":8903",
         ReadTimeout:    30 * time.Second,

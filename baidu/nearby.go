@@ -2,6 +2,7 @@ package baidu
 
 import (
 	"github.com/xlvector/gomap/data"
+	"github.com/xlvector/gomap/util"
 )
 
 type NearByAPI struct {
@@ -27,19 +28,20 @@ func (self *NearByAPI) NearBy(address, query, region string, radius int) *data.N
 	}
 
 	ret := data.NearByResp{
-		Status: places.Status,
+		Status:  places.Status,
 		Message: places.Message,
 		Results: []data.NearyByResult{},
 	}
 
 	for _, result := range places.Results {
 		dret := data.NearyByResult{
-			Name: result.Name,
+			Name:        result.Name,
+			Orientation: util.OrientationInChina(&data.Location{Lng: bestMatchLocation.Lng, Lat: bestMatchLocation.Lat}, &data.Location{Lng: result.Location.Lng, Lat: result.Location.Lat}),
 			Location: data.Location{
 				Lng: result.Location.Lng,
 				Lat: result.Location.Lat,
 			},
-			Address: result.Address,
+			Address:  result.Address,
 			Distance: float64(result.DetailInfo.Distance),
 		}
 		ret.Results = append(ret.Results, dret)

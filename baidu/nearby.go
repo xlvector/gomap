@@ -3,7 +3,22 @@ package baidu
 import (
 	"github.com/xlvector/gomap/data"
 	"github.com/xlvector/gomap/util"
+	"sort"
 )
+
+type NearyByResultList []data.NearyByResult
+
+func (self NearyByResultList) Len() int {
+	return len(self)
+}
+
+func (self NearyByResultList) Less(i, j int) bool {
+	return self[i].Distance < self[j].Distance
+}
+
+func (self NearyByResultList) Swap(i, j int) {
+	self[i], self[j] = self[j], self[i]
+}
 
 type NearByAPI struct {
 	placeAPI *PlaceAPI
@@ -46,5 +61,6 @@ func (self *NearByAPI) NearBy(address, query, region string, radius int) *data.N
 		}
 		ret.Results = append(ret.Results, dret)
 	}
+	sort.Sort((NearyByResultList)(ret.Results))
 	return &ret
 }

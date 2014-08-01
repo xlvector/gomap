@@ -99,6 +99,7 @@ func (self *PlaceAPI) Search(params map[string]string) *PlaceAPIResp {
 	log.Println(endpoint)
 	resp, err := self.dl.Download(endpoint)
 	if err != nil {
+		log.Println("Place Search", err)
 		return nil
 	}
 	return Decode(resp)

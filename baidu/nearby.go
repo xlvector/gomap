@@ -3,7 +3,6 @@ package baidu
 import (
 	"github.com/xlvector/gomap/data"
 	"github.com/xlvector/gomap/util"
-	"log"
 	"sort"
 )
 

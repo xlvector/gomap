@@ -97,12 +97,15 @@ func NewPlaceAPI() *PlaceAPI {
 func (self *PlaceAPI) Search(params map[string]string) *PlaceAPIResp {
 	endpoint := buildEndpoint("http://api.map.baidu.com/place/v2/search?", params)
 	log.Println(endpoint)
-	resp, err := self.dl.Download(endpoint)
-	if err != nil {
-		log.Println("Place Search", err)
-		return nil
+	for i := 0; i < 3; i++ {
+		resp, err := self.dl.Download(endpoint)
+		if err != nil {
+			log.Println("Place Search", err)
+			continue
+		}
+		return Decode(resp)
 	}
-	return Decode(resp)
+	return nil
 }
 
 func (self *PlaceAPI) SearchInRegion(query, region string) *PlaceAPIResp {

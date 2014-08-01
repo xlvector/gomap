@@ -3,6 +3,7 @@ package baidu
 import (
 	"github.com/xlvector/gomap/data"
 	"github.com/xlvector/gomap/util"
+	"log"
 	"sort"
 )
 
@@ -46,14 +47,13 @@ func (self *NearByAPI) NearBy(address, query, region string, radius int) *data.N
 		Status:  places.Status,
 		Message: places.Message,
 		Results: []data.NearyByResult{},
-		Center: data.NearyByResult{
+		Center: data.PlaceResult{
 			Name: locations.Results[0].Name,
 			Location: data.Location{
 				Lng: bestMatchLocation.Lng,
 				Lat: bestMatchLocation.Lat,
 			},
-			Address:  locations.Results[0].Address,
-			Distance: 0,
+			Address: locations.Results[0].Address,
 		},
 	}
 

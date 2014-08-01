@@ -17,7 +17,19 @@ type NearByResp struct {
 	Status  int             `json:"status"`
 	Message string          `json:"message"`
 	Results []NearyByResult `json:"results"`
-	Center  NearyByResult   `json:"center"`
+	Center  PlaceResult     `json:"center"`
+}
+
+type PlaceResult struct {
+	Name     string   `json:"name"`
+	Location Location `json:"location"`
+	Address  string   `json:"address"`
+}
+
+type PlaceResp struct {
+	Status  int         `json:"status"`
+	Message string      `json:"message"`
+	Result  PlaceResult `json:"result"`
 }
 
 type DirectionResp struct {

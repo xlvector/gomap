@@ -11,11 +11,21 @@ import (
 )
 
 func AK() string {
-	mod := time.Now().Unix() % 3
+	mod := time.Now().Unix() % 8
 	if mod == 0 {
 		return "F827baac9ff8d1e98178bcb0be60fc3b"
 	} else if mod == 1 {
 		return "693c4e0009c584eaafefdb5116e1b83e"
+	} else if mod == 2 {
+		return "F5f73aaf9942862674595224a4f486cb"
+	} else if mod == 3 {
+		return "CC4726bc48df6f635d4d69647b19ca02"
+	} else if mod == 4 {
+		return "458af52b49be366e290166aac63f25ea"
+	} else if mod == 5 {
+		return "D2ec390ea2301659e4a99313c584e094"
+	} else if mod == 6 {
+		return "D18ad00c81680c7ad7707af245b48c25"
 	} else {
 		return "AA8c70e83172c4eaf142b63c546c9bf7"
 	}

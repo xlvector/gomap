@@ -7,11 +7,19 @@ import (
 	"log"
 	"net/url"
 	"strconv"
+	"time"
 )
 
-const (
-	AK = "F827baac9ff8d1e98178bcb0be60fc3b"
-)
+func AK() string {
+	mod := time.Now().Unix() % 3
+	if mod == 0 {
+		return "F827baac9ff8d1e98178bcb0be60fc3b"
+	} else if mod == 1 {
+		return "693c4e0009c584eaafefdb5116e1b83e"
+	} else {
+		return "AA8c70e83172c4eaf142b63c546c9bf7"
+	}
+}
 
 type Location struct {
 	Lng float64 `json:"lng"`
@@ -78,7 +86,7 @@ func buildEndpoint(api string, params map[string]string) string {
 		endpoint += "scope=2&"
 	}
 	if !hasAK {
-		endpoint += "ak=" + AK + "&"
+		endpoint += "ak=" + AK() + "&"
 	}
 	endpoint += "output=json"
 	return endpoint

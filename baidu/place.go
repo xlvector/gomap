@@ -164,8 +164,23 @@ func (self *PlaceAPI) SearchPlace(address, region string) *data.PlaceResp {
 				Lng: bestMatchLocation.Lng,
 				Lat: bestMatchLocation.Lat,
 			},
-			Address: locations.Results[0].Address,
+			Address:   locations.Results[0].Address,
+			Telephone: locations.Results[0].Telephone,
 		},
+		Results: []data.PlaceResult{},
+	}
+
+	for _, r := range locations.Results {
+		e := data.PlaceResult{
+			Name: r.Name,
+			Location: data.Location{
+				Lng: r.Location.Lng,
+				Lat: r.Location.Lat,
+			},
+			Address:   r.Address,
+			Telephone: r.Telephone,
+		}
+		ret.Results = append(ret.Results, e)
 	}
 	return &ret
 }

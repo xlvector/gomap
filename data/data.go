@@ -21,15 +21,17 @@ type NearByResp struct {
 }
 
 type PlaceResult struct {
-	Name     string   `json:"name"`
-	Location Location `json:"location"`
-	Address  string   `json:"address"`
+	Name      string   `json:"name"`
+	Location  Location `json:"location"`
+	Address   string   `json:"address"`
+	Telephone string   `json:"telephone"`
 }
 
 type PlaceResp struct {
-	Status  int         `json:"status"`
-	Message string      `json:"message"`
-	Result  PlaceResult `json:"result"`
+	Status  int           `json:"status"`
+	Message string        `json:"message"`
+	Result  PlaceResult   `json:"result"`
+	Results []PlaceResult `json:"results"`
 }
 
 type DirectionResp struct {

@@ -39,7 +39,6 @@ func (self *PlaceService) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		}
 	} else {
 		answers = self.api.SearchPlace(address, region)
-
 	}
 	output, err := json.Marshal(answers)
 	if err == nil {
